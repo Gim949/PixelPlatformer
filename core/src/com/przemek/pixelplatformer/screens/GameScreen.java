@@ -7,33 +7,26 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.przemek.pixelplatformer.main.PixelPlatformer;
 import com.przemek.pixelplatformer.managers.PhysicsManager;
 import com.przemek.pixelplatformer.utils.Constants;
 
 public class GameScreen extends ScreenAdapter
 {
-	OrthographicCamera cam;
-	PhysicsManager physics;
+	private PixelPlatformer game;
 	
 	public GameScreen()
 	{
-		physics = new PhysicsManager();
-		cam = new OrthographicCamera(Constants.WIDTH, Constants.HEIGHT);
-		cam.setToOrtho(false);
-		
-		FixtureDef fixDef = new FixtureDef();
-		fixDef.density = 1.0f;
-		Body body = physics.createBox(BodyDef.BodyType.StaticBody, 100, 100, 20, 20, 0.0f);
+		game = new PixelPlatformer();
 	}
 	
 	@Override
 	public void render (float delta) 
 	{
-		physics.updateWorld(1/60f);
+		game.updatePhysics();
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		physics.debugRender(cam.combined);
-		
+			
 		update(delta);
 	}
 
