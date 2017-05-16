@@ -24,9 +24,13 @@ public class GameScreen extends ScreenAdapter
 	public void render (float delta) 
 	{
 		game.updatePhysics();
-		Gdx.gl.glClearColor(0, 0, 0, 1);
+		Gdx.gl.glClearColor(0.54f, 0.94f, 0.95f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-			
+		game.mainBatch.begin();
+		game.renderMapStuff();
+		game.debug();
+		game.mainBatch.end();
+		
 		update(delta);
 	}
 
